@@ -1,4 +1,4 @@
-package ltd.webbiskools.quizmgr.service;
+package ltd.webbiskools.quizmgr.routes;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,5 @@
 target/
+**/db_access.properties
 !**/src/main/**
 !**/src/test/**
 
