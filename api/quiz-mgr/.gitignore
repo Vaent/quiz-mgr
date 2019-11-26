@@ -1,6 +1,6 @@
 target/
-db_access.properties
 !**/src/main/**
+db_access.properties
 !**/src/test/**
 
 ### IntelliJ IDEA ###
