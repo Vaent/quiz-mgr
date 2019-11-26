@@ -32,4 +32,16 @@ public class QuizInfoRetriever extends DatabaseAccessor {
             .collect(Collectors.toList());
     }
 
+    public String getTitleForQuiz(int quizId) {
+        ResultSet results = execute("SELECT title FROM quiz WHERE id=" + quizId);
+        try {
+            if (results.next()) {
+                return results.getString("title");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Exception thrown while getting title for quiz with ID " + quizId + ": " + ex);
+        }
+        return "";
+    }
+
 }

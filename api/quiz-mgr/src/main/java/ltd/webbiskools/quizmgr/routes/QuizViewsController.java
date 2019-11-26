@@ -21,10 +21,11 @@ public class QuizViewsController {
         return "quizzes";
     }
 
-    @GetMapping("/{id}/{quizTitle}")
-    public String questions(ModelMap model, @PathVariable int id, @PathVariable String quizTitle) {
-        model.addAttribute("questions", quizInfoRetriever.getQuestionsForQuiz(id));
-        model.addAttribute("quizTitle", quizTitle);
+    @GetMapping("/{quizId}/{quizTitle}")
+    public String questions(ModelMap model, @PathVariable int quizId, @PathVariable String quizTitle) {
+        model.addAttribute("questions", quizInfoRetriever.getQuestionsForQuiz(quizId));
+        String refTitle = quizInfoRetriever.getTitleForQuiz(quizId);
+        model.addAttribute("quizTitle", (refTitle.equals("") ? quizTitle : refTitle));
         return "questions";
     }
 
