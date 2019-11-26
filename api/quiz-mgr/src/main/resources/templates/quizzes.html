@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Quizzes</title>
@@ -7,12 +8,7 @@
 <body>
     <h1>Quizzes</h1>
     <div id="quizzesList">
-        <p class="quizTitle">
-            <a>First quiz title</a>
-        </p>
-        <p class="quizTitle">
-            <a>Second quiz title</a>
-        </p>
+        <p th:each="title:${titles}" th:text="${title}"></p>
     </div>
 </body>
 </html>
