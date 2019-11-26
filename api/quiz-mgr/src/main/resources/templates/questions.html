@@ -7,8 +7,8 @@
 </head>
 <body>
     <h1 th:text="${quizTitle}">Quiz title</h1>
-    <p th:text="${quizTitle}">
-        Quiz title again
-    </p>
+    <div>
+        <p th:each="question:${questions}" th:text="${question.getQuestionText()}"></p>
+    </div>
 </body>
 </html>

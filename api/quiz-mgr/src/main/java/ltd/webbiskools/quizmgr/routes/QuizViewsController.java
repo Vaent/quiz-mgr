@@ -21,8 +21,9 @@ public class QuizViewsController {
         return "quizzes";
     }
 
-    @GetMapping("/{quizTitle}")
-    public String questions(ModelMap model, @PathVariable String quizTitle) {
+    @GetMapping("/{id}/{quizTitle}")
+    public String questions(ModelMap model, @PathVariable int id, @PathVariable String quizTitle) {
+        model.addAttribute("questions", quizInfoRetriever.getQuestionsForQuiz(id));
         model.addAttribute("quizTitle", quizTitle);
         return "questions";
     }
