@@ -17,7 +17,7 @@ public class QuizViewsController {
 
     @GetMapping()
     public String quizzes(ModelMap model) {
-        model.addAttribute("titles", quizInfoRetriever.getAllQuizTitles());
+        model.addAttribute("quizzes", quizInfoRetriever.getAllQuizzes());
         return "quizzes";
     }
 

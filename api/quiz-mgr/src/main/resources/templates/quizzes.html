@@ -8,7 +8,7 @@
 <body>
     <h1>Quizzes</h1>
     <div id="quizzesList">
-        <p th:each="title:${titles}" th:text="${title}"></p>
+        <p th:each="quiz:${quizzes}" th:attr="id=${quiz.getId()}" th:text="${quiz.getTitle()}"></p>
     </div>
 </body>
 </html>
