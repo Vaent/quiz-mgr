@@ -3,6 +3,7 @@ package ltd.webbiskools.quizmgr.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import ltd.webbiskools.quizmgr.model.dbmappings.Question;
@@ -29,6 +30,7 @@ public class QuizInfoRetriever extends DatabaseAccessor {
         }
         return list.stream()
             .filter(q -> q.getQuizId() == quizId)
+            .sorted(Comparator.comparingInt(Question::getQuestionIndex))
             .collect(Collectors.toList());
     }
 
