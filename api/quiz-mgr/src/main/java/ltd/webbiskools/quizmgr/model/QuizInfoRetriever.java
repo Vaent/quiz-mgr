@@ -3,9 +3,11 @@ package ltd.webbiskools.quizmgr.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import ltd.webbiskools.quizmgr.model.dbmappings.Answer;
 import ltd.webbiskools.quizmgr.model.dbmappings.Question;
 import ltd.webbiskools.quizmgr.model.dbmappings.Quiz;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,28 @@ public class QuizInfoRetriever extends DatabaseAccessor {
             list.addAll(Quiz.listFrom(results));
         }
         return list;
+    }
+
+    /** Returns a consolidated list of all answers in the database associated with each of the specified questions */
+    public List<Answer> getAnswersFor(Question... questions) {
+        return Arrays.stream(questions)
+            .map(Question::getId)
+            .map(this::getAnswersForQuestion)
+            .flatMap(List::stream)
+            .collect(Collectors.toList());
+    }
+
+    /** Returns a list, sorted by index, of all answers in the database matching the questionId. */
+    public List<Answer> getAnswersForQuestion(int questionId) {
+        List<Answer> list = new ArrayList<>();
+        ResultSet results = selectFrom(ANSWER_TABLE_NAME, "id", "question_id", "answer_index", "answer_text");
+        if (results != null) {
+            list.addAll(Answer.listFrom(results));
+        }
+        return list.stream()
+            .filter(a -> a.getQuestionId() == questionId)
+            .sorted(Comparator.comparingInt(Answer::getAnswerIndex))
+            .collect(Collectors.toList());
     }
 
     /** Returns a list, sorted by index, of all questions in the database matching the quizId. */

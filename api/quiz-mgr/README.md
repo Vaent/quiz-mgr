@@ -25,4 +25,4 @@ By default the service runs locally on `http://localhost:8080` and pages can be 
 
 `/quizzes` displays a list of all quizzes in the database.
 
-`/quizzes/{quizId}/{quizTitle}` displays the questions associated with the supplied {quizId}. The URL includes a {quizTitle} for readability, but the database value is retrieved and used for elements on the page unless no title exists in the database. Currently the id is not validated so a page will be displayed for quizzes which don't exist in the database and will use the supplied {quizTitle}; this behaviour should be changed.
+`/quizzes/{quizId}/{quizTitle}` displays the questions associated with the supplied {quizId} and the answers associated with each question. The URL includes a {quizTitle} for readability, but the database value is retrieved and used for elements on the page unless no title exists in the database. Currently the id is not validated so a page will be displayed for quizzes which don't exist in the database and will use the supplied {quizTitle}; this behaviour should be changed.

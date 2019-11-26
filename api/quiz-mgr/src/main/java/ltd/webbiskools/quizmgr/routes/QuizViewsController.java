@@ -1,6 +1,9 @@
 package ltd.webbiskools.quizmgr.routes;
 
+import java.util.List;
 import ltd.webbiskools.quizmgr.model.QuizInfoRetriever;
+import ltd.webbiskools.quizmgr.model.dbmappings.Answer;
+import ltd.webbiskools.quizmgr.model.dbmappings.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,7 +26,11 @@ public class QuizViewsController {
 
     @GetMapping("/{quizId}/{quizTitle}")
     public String questions(ModelMap model, @PathVariable int quizId, @PathVariable String quizTitle) {
-        model.addAttribute("questions", quizInfoRetriever.getQuestionsForQuiz(quizId));
+        List<Question> questions = quizInfoRetriever.getQuestionsForQuiz(quizId);
+        model.addAttribute("questions", questions);
+        Question[] questionsArray = questions.toArray(new Question[questions.size()]);
+        List<Answer> answers = quizInfoRetriever.getAnswersFor(questionsArray);
+        model.addAttribute("answers", answers);
         String refTitle = quizInfoRetriever.getTitleForQuiz(quizId);
         model.addAttribute("quizTitle", (refTitle.equals("") ? quizTitle : refTitle));
         return "questions";

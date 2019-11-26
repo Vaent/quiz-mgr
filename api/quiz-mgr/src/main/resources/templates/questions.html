@@ -8,7 +8,12 @@
 <body>
     <h1 th:text="${quizTitle}">Quiz title</h1>
     <div id="questionsList">
-        <p th:each="question:${questions}" th:text="${question.getQuestionIndex() + '. ' + question.getQuestionText()}"></p>
+        <div th:each="question:${questions}">
+            <p class="questionText" th:text="${question.getQuestionIndex() + '. ' + question.getQuestionText()}"></p>
+            <ul th:each="answer:${answers}"
+                th:if="${answer.getQuestionId()} == ${question.getId()}"
+                th:text="${answer.getAnswerText()}"></ul>
+        </div>
     </div>
 </body>
 </html>
