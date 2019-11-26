@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuizInfoRetriever extends DatabaseAccessor {
 
+    /** Returns a list of all quizzes in the database in the order they are returned by the database */
     public List<Quiz> getAllQuizzes() {
         List<Quiz> list = new ArrayList<>();
         ResultSet results = selectFrom(QUIZ_TABLE_NAME, "id", "title");
@@ -22,6 +23,7 @@ public class QuizInfoRetriever extends DatabaseAccessor {
         return list;
     }
 
+    /** Returns a list, sorted by index, of all questions in the database matching the quizId. */
     public List<Question> getQuestionsForQuiz(int quizId) {
         List<Question> list = new ArrayList<>();
         ResultSet results = selectFrom(QUESTION_TABLE_NAME, "id", "quiz_id", "question_index", "question_text");
@@ -34,6 +36,7 @@ public class QuizInfoRetriever extends DatabaseAccessor {
             .collect(Collectors.toList());
     }
 
+    /** Returns the title associated with the quizId in the database; or if none exists, returns an empty string */
     public String getTitleForQuiz(int quizId) {
         ResultSet results = execute("SELECT title FROM quiz WHERE id=" + quizId);
         try {
