@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import ltd.webbiskools.quizmgr.model.dbmappings.Permission;
 import ltd.webbiskools.quizmgr.model.dbmappings.UserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,6 +27,17 @@ public class UserCredentialChecker extends DatabaseAccessor {
             list.addAll(UserDetails.listFrom(results));
         }
         return list;
+    }
+
+    public int getLoggedInPermission() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String pDescription = auth.getAuthorities().stream()
+            .map(GrantedAuthority::getAuthority)
+            .findFirst().orElse("");
+        return getAllRefPermissions().entrySet().stream()
+            .filter(entry -> ("ROLE_" + entry.getValue()).equals(pDescription))
+            .map(Map.Entry::getKey)
+            .findFirst().orElse(-1);
     }
 
 }

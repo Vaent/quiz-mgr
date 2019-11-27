@@ -23,7 +23,7 @@ By default the service runs locally on `http://localhost:8080` and pages can be 
 
 While not logged in, any attempt to access any route will redirect to `/login`. Details of registered users are loaded from the database when the service starts.
 
-**IMPORTANT: current security implementation is very basic and unsuitable for a live service.** Robust password encryption and use of HTTPS to exchange credentials are yet to be applied as minimum requirements for release.
+**IMPORTANT: current security implementation is very basic and unsuitable for a live service.** Robust password encryption and use of HTTPS to exchange credentials are yet to be applied as minimum requirements for release. Additionally, credentials should be checked against the database on demand rather than loading into memory, if possible.
 
 `/login` is used by the user authentication system. Successfully signing in results in a redirect to `/quizzes`. The page is based on the Spring default to ensure compatibility with the Spring Security workflow.
 
@@ -31,4 +31,4 @@ While not logged in, any attempt to access any route will redirect to `/login`. 
 
 `/quizzes` displays a list of all quizzes in the database.
 
-`/quizzes/{quizId}/{quizTitle}` displays the questions associated with the supplied {quizId} and the answers associated with each question. The URL includes a {quizTitle} for readability, but the database value is retrieved and used for elements on the page unless no title exists in the database. Currently the id is not validated so a page will be displayed for quizzes which don't exist in the database and will use the supplied {quizTitle}; this behaviour should be changed.
+`/quizzes/{quizId}/{quizTitle}` displays the questions associated with the supplied {quizId} and, if the logged-in user has appropriate permissions, the answers associated with each question. The URL includes a {quizTitle} for readability, but the database value is retrieved and used for elements on the page unless no title exists in the database. Currently the {quizId} is not validated so a page will be displayed for quizzes which don't exist in the database and will use the supplied {quizTitle}; **this behaviour should be changed**.
