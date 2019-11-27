@@ -14,7 +14,7 @@
             <div class="answersList" th:if="${permission==1 || permission ==2}">
                 <ul th:each="answer:${answers}"
                     th:if="${answer.getQuestionId()} == ${question.getId()}"
-                    th:text="${answer.getAnswerText()}"></ul>
+                    th:text="${answer.getAnswerIndex() + '. ' + answer.getAnswerText()}"></ul>
             </div>
         </div>
     </div>

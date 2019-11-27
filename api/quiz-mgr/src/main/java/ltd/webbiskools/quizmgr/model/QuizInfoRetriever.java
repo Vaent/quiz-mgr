@@ -47,6 +47,7 @@ public class QuizInfoRetriever extends DatabaseAccessor {
             .collect(Collectors.toList());
     }
 
+    /** Returns a list of all answers for all questions associated with the quizId */
     public List<Answer> getAnswersForQuiz(int quizId) {
         return getQuestionsForQuiz(quizId).stream()
             .flatMap(q -> getAnswersForQuestion(q.getId()).stream())
