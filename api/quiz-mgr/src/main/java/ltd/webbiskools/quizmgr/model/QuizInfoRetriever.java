@@ -47,6 +47,12 @@ public class QuizInfoRetriever extends DatabaseAccessor {
             .collect(Collectors.toList());
     }
 
+    public List<Answer> getAnswersForQuiz(int quizId) {
+        return getQuestionsForQuiz(quizId).stream()
+            .flatMap(q -> getAnswersForQuestion(q.getId()).stream())
+            .collect(Collectors.toList());
+    }
+
     /** Returns a list, sorted by index, of all questions in the database matching the quizId. */
     public List<Question> getQuestionsForQuiz(int quizId) {
         List<Question> list = new ArrayList<>();

@@ -31,13 +31,10 @@ public class QuizViewsController {
     @GetMapping("/{quizId}/{quizTitle}")
     public String questions(ModelMap model, @PathVariable int quizId, @PathVariable String quizTitle) {
         model.addAttribute("permission", userCredentialChecker.getLoggedInPermission());
-        List<Question> questions = quizInfoRetriever.getQuestionsForQuiz(quizId);
-        model.addAttribute("questions", questions);
-        Question[] questionsArray = questions.toArray(new Question[0]);
-        List<Answer> answers = quizInfoRetriever.getAnswersFor(questionsArray);
-        model.addAttribute("answers", answers);
+        model.addAttribute("questions", quizInfoRetriever.getQuestionsForQuiz(quizId));
+        model.addAttribute("answers", quizInfoRetriever.getAnswersForQuiz(quizId));
         String refTitle = quizInfoRetriever.getTitleForQuiz(quizId);
-        model.addAttribute("quizTitle", (refTitle.equals("") ? quizTitle : refTitle));
+        model.addAttribute("quizTitle", (refTitle.isEmpty() ? quizTitle : refTitle));
         return "questions";
     }
 
