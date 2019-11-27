@@ -17,6 +17,22 @@ netstat -ano | find "8080"
 taskkill /F /PID 14496
 ```
 
+## Database access
+
+A file named `db_access.properties` must be present on the classpath (recommended location is under `src/main/resources`) and must contain the following attributes:
+```
+dbUrl=<url>
+dbUserName=<username>
+dbPassword=<password>
+```
+
+Example:
+```
+dbUrl=jdbc:postgresql://localhost:5432/quizzes
+dbUserName=dbUser
+dbPassword=s3cr3t
+```
+
 ## Routes
 
 By default the service runs locally on `http://localhost:8080` and pages can be viewed in the browser by appending the route to this e.g. `http://localhost:8080/quizzes`.
