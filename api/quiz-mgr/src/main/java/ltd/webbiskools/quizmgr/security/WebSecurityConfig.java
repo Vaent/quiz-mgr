@@ -5,23 +5,22 @@ import ltd.webbiskools.quizmgr.model.UserCredentialChecker;
 import ltd.webbiskools.quizmgr.model.dbmappings.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebSecurity
-@ComponentScan("ltd.webbiskools.quizmgr")
-public class WebSecurityConfig implements WebMvcConfigurer {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserCredentialChecker userCredentialChecker;
 
     @Bean
-    public UserDetailsService userDetailsService() throws Exception {
+    @Override
+    public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         Map<Integer, String> permissions = userCredentialChecker.getAllRefPermissions();
         for (UserDetails user : userCredentialChecker.getAllUserDetails()) {
@@ -34,12 +33,15 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         return manager;
     }
 
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/")
-            .authorizeRequests()
-            .anyRequest().hasAnyRole()
-            .and()
-            .httpBasic();
+        http.authorizeRequests()
+            .anyRequest().authenticated()
+        .and().formLogin()
+            .loginPage("/login")
+            .permitAll()
+            .successForwardUrl("/login")
+        .and().logout();
     }
 
 }

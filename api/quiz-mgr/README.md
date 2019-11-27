@@ -21,11 +21,13 @@ taskkill /F /PID 14496
 
 By default the service runs locally on `http://localhost:8080` and pages can be viewed in the browser by appending the route to this e.g. `http://localhost:8080/quizzes`.
 
-All pages can only be viewed when logged in. Any attempt to access a route (including undefined routes) while not logged in will redirect to the login page. Registered users are loaded from the database when the service starts. A 'Sign out' link has been added to the top of each custom view, linking to the logout page.
+While not logged in, any attempt to access any route will redirect to `/login`. Details of registered users are loaded from the database when the service starts.
 
-`/login` is used by the user authentication system - no custom route is defined. **Navigating directly to this route results in a 404 error after login credentials are supplied** (this is true even if the user is already logged in).
+**IMPORTANT: current security implementation is very basic and unsuitable for a live service.** Robust password encryption and use of HTTPS to exchange credentials are yet to be applied as minimum requirements for release.
 
-`/logout` is similarly used by the user authentication system with no customisation. Confirming sign out redirects to the login page.
+`/login` is used by the user authentication system. Successfully signing in results in a redirect to `/quizzes`. The page is based on the Spring default to ensure compatibility with the Spring Security workflow.
+
+`/logout` immediately signs the user out (previously confirmation was requested) and redirects to `/login`.
 
 `/quizzes` displays a list of all quizzes in the database.
 
