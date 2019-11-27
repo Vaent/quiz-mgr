@@ -6,6 +6,7 @@
     <title th:text="${quizTitle}">Quiz</title>
 </head>
 <body>
+    <a href="/logout">Sign out</a>
     <h1 th:text="${quizTitle}">Quiz title</h1>
     <div id="questionsList">
         <div th:each="question:${questions}">

@@ -21,7 +21,11 @@ taskkill /F /PID 14496
 
 By default the service runs locally on `http://localhost:8080` and pages can be viewed in the browser by appending the route to this e.g. `http://localhost:8080/quizzes`.
 
-`/login` is a placeholder for the landing page - once security is implemented no other page will be viewable unless logged in.
+All pages can only be viewed when logged in. Any attempt to access a route (including undefined routes) while not logged in will redirect to the login page. Registered users are loaded from the database when the service starts. A 'Sign out' link has been added to the top of each custom view, linking to the logout page.
+
+`/login` is used by the user authentication system - no custom route is defined. **Navigating directly to this route results in a 404 error after login credentials are supplied** (this is true even if the user is already logged in).
+
+`/logout` is similarly used by the user authentication system with no customisation. Confirming sign out redirects to the login page.
 
 `/quizzes` displays a list of all quizzes in the database.
 
