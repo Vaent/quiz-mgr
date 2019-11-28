@@ -8,7 +8,7 @@
 <body>
     <a href="/logout">Sign out</a>
     <h1>Quizzes</h1>
-    <div id="quizzesList">
+    <div id="quizzes-list">
         <p th:each="quiz:${quizzes}">
             <a th:href="@{quizzes/{id}/{title}(id=${quiz.getId()},title=${quiz.getTitle()})}" th:text="${quiz.getTitle()}"></a>
         </p>

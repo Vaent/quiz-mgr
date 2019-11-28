@@ -3,27 +3,29 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
     <title>Sign In</title>
 </head>
 <body>
-    <h1>Sign in with your registered user details</h1>
+    <h1>WEBBISKOOLS&nbsp;LTD QUIZ&nbsp;MANAGER</h1>
+    <div th:if="${param.error}" class="alert alert-error">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}" class="alert alert-success">
+        You have been logged out.
+    </div>
+    <h2>Sign in with your registered user details</h2>
     <div>
-        <form id="loginForm" th:action="@{/login}" method="post">
-            <fieldset>
-                <div th:if="${param.error}" class="alert alert-error">
-                    Invalid username and password.
-                </div>
-                <div th:if="${param.logout}" class="alert alert-success">
-                    You have been logged out.
-                </div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username"/>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password"/>
-                <div>
-                    <button type="submit">Log in</button>
-                </div>
-            </fieldset>
+        <form id="login-form" th:action="@{/login}" method="post">
+            <div id="login-form-elements">
+                <label for="username" class="login-field-label">Username</label>
+                <input type="text" id="username" name="username" class="login-field-input"/>
+                <label for="password" class="login-field-label">Password</label>
+                <input type="password" id="password" name="password" class="login-field-input"/>
+            </div>
+            <div>
+                <button type="submit" class="login-button">Sign in</button>
+            </div>
         </form>
     </div>
 </body>
