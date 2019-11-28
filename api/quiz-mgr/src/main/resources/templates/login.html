@@ -9,9 +9,9 @@
 <body>
     <h1>WEBBISKOOLS&nbsp;LTD QUIZ&nbsp;MANAGER</h1>
     <div th:if="${param.error}" class="alert alert-error">
-        Invalid username and password.
+        Invalid username/password combination.
     </div>
-    <div th:if="${param.logout}" class="alert alert-success">
+    <div th:if="${logout}" class="alert alert-success">
         You have been logged out.
     </div>
     <h2>Sign in with your registered user details</h2>
