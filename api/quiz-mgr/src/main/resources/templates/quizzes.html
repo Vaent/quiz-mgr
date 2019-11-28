@@ -3,15 +3,27 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="styles.css">
     <title>Quizzes</title>
 </head>
 <body>
-    <a href="/logout">Sign out</a>
-    <h1>Quizzes</h1>
+    <h1>WEBBISKOOLS&nbsp;LTD QUIZ&nbsp;MANAGER</h1>
+    <a href="/logout" class="logout-link">Sign out</a>
+    <h2>Quizzes</h2>
     <div id="quizzes-list">
-        <p th:each="quiz:${quizzes}">
-            <a th:href="@{quizzes/{id}/{title}(id=${quiz.getId()},title=${quiz.getTitle()})}" th:text="${quiz.getTitle()}"></a>
-        </p>
+        <p>The quizzes currently available in our database are listed below.</p>
+        <p>Click on a quiz title to view full details for that quiz.</p>
+        <a class="quiz-link" th:each="quiz:${quizzes}" th:href="@{quizzes/{id}/{title}(id=${quiz.getId()},title=${quiz.getTitle()})}">
+            <div class="quiz-box" th:text="${quiz.getTitle()}"></div>
+        </a>
+
+
+        <a class="quiz-link" href="/fakelink">
+        <div class="quiz-box">One quiz</div></a>
+        <a class="quiz-link" href="/alsofake">
+        <div class="quiz-box">Another quiz which ought to have loads of text inside it so that hopefully it wraps to another lineAnother quiz which ought to have loads of text inside it so that hopefully it wraps to another lineAnother quiz which ought to have loads of text inside it so that hopefully it wraps to another line</div>
+        </a>
+
     </div>
 </body>
 </html>
