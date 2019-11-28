@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${quizTitle}">Quiz</title>
+</head>
+<body>
+    <a href="/logout">Sign out</a>
+    <h1 th:text="${quizTitle}">Quiz title</h1>
+    <div id="questionsList">
+        <div class="questionBox" th:each="question:${questions}">
+            <p class="questionText" th:text="${question.getQuestionIndex() + '. ' + question.getQuestionText()}"></p>
+            <div class="answersList" th:if="${permission==1 || permission ==2}">
+                <ul th:each="answer:${answers}"
+                    th:if="${answer.getQuestionId()} == ${question.getId()}"
+                    th:text="${answer.getAnswerIndex() + '. ' + answer.getAnswerText()}"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

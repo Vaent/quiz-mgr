@@ -1,0 +1,10 @@
+target/
+!**/src/main/**
+db_access.properties
+!**/src/test/**
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
