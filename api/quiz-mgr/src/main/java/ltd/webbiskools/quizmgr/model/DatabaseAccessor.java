@@ -1,8 +1,7 @@
 package ltd.webbiskools.quizmgr.model;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.sql.*;
+import org.springframework.beans.factory.annotation.Value;
 
 public abstract class DatabaseAccessor {
 

@@ -50,6 +50,10 @@
 
     <script th:if="${permission==1}">
         function createAnswer(questionId, answerText) {
+            if ((typeof questionId != "number") || (typeof answerText != "string")) {
+                console.log("invalid parameters!");
+                return;
+            }
             let csrfHeader = document.getElementsByTagName("meta").namedItem("_csrf_header").getAttribute("content");
             let csrfToken = document.getElementsByTagName("meta").namedItem("_csrf_token").getAttribute("content");
             let ajax = new XMLHttpRequest();
