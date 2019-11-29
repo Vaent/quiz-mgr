@@ -1,10 +1,7 @@
 package ltd.webbiskools.quizmgr.routes;
 
-import java.util.List;
 import ltd.webbiskools.quizmgr.model.QuizInfoRetriever;
 import ltd.webbiskools.quizmgr.model.UserCredentialChecker;
-import ltd.webbiskools.quizmgr.model.dbmappings.Answer;
-import ltd.webbiskools.quizmgr.model.dbmappings.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
