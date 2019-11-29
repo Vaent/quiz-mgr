@@ -12,11 +12,20 @@
     <h1>WEBBISKOOLS&nbsp;LTD QUIZ&nbsp;MANAGER</h1>
     <a href="/logout" class="logout-link">Sign out</a>
     <h2 th:text="${'Quiz: ' + quizTitle}">Quiz title</h2>
+    <p style="font-weight:bold">Enter details below to create a new answer for a question</p>
+    <form id="new-question-form" th:if="${permission==1}">
+        <input type="hidden" id="quiz-id" name="quiz-id" value="${quizId}">
+        <label for="enteredQuestion">Question ID: </label>
+        <input id="enteredQuestion" name="question" type="number"/>
+        <label for="enteredAnswer">Answer: </label>
+        <input id="enteredAnswer" name="answer" type="text"/>
+        <button onclick="createAnswerFromForm()">Submit</button>
+    </form>
     <div id="questions-list">
         <p th:if="${permission==1}">Click on a question to show/hide the possible answers and the question editor options.</p>
         <p th:if="${permission==2}">Click on a question to show/hide the possible answers.</p>
         <div class="question-box"
-             th:attr="onclick=${(permission==1 || permission ==2) ? 'toggleAnswerVisibility(' + question.getQuestionIndex() + ')' : ''}"
+             th:attr="onclick=${(permission==1 || permission==2) ? 'toggleAnswerVisibility(' + question.getQuestionIndex() + ')' : ''}"
              th:each="question:${questions}">
             <div th:id="${'editor-controls-for-q' + question.getQuestionIndex()}"
                  class="editor-controls"
@@ -64,6 +73,12 @@
             ajax.open("PUT", "/record/create/answer?questionId=" + questionId + "&answerText=" + answerText);
             ajax.setRequestHeader(csrfHeader, csrfToken);
             ajax.send();
+        }
+
+        function createAnswerFromForm() {
+            let q = document.getElementById("enteredQuestion").value;
+            let a = document.getElementById("enteredAnswer").value;
+            createAnswer(parseInt(q), a);
         }
     </script>
 </body>
