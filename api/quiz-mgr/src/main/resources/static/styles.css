@@ -29,6 +29,10 @@
     grid-column-end: 2;
 }
 
+.question-text {
+    font-weight: bold;
+}
+
 .quiz-box, .question-box {
     border: 1px solid grey;
     padding: 20px;

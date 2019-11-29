@@ -11,14 +11,25 @@
     <a href="/logout" class="logout-link">Sign out</a>
     <h2 th:text="${'Quiz: ' + quizTitle}">Quiz title</h2>
     <div id="questions-list">
-        <div class="question-box" th:each="question:${questions}">
+        <div class="question-box"
+             th:attr="onclick=${(permission==1 || permission ==2) ? 'toggleAnswerVisibility(' + question.getQuestionIndex() + ')' : ''}"
+             th:each="question:${questions}">
             <p class="question-text" th:text="${question.getQuestionIndex() + '. ' + question.getQuestionText()}"></p>
-            <div class="answers-list" th:if="${permission==1 || permission ==2}">
+            <div th:id="${'answers-for-q' + question.getQuestionIndex()}"
+                 class="answers-list"
+                 th:if="${permission==1 || permission ==2}"
+                 hidden>
                 <ul th:each="answer:${answers}"
                     th:if="${answer.getQuestionId()} == ${question.getId()}"
                     th:text="${answer.getAnswerIndex() + '. ' + answer.getAnswerText()}"></ul>
             </div>
         </div>
     </div>
+
+    <script th:if="${permission==1 || permission ==2}">
+        function toggleAnswerVisibility(questionNumber) {
+            document.getElementById("answers-for-q" + questionNumber).hidden ^= true;
+        }
+    </script>
 </body>
 </html>
