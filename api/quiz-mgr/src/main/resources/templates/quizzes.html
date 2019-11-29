@@ -16,14 +16,6 @@
         <a class="quiz-link" th:each="quiz:${quizzes}" th:href="@{quizzes/{id}/{title}(id=${quiz.getId()},title=${quiz.getTitle()})}">
             <div class="quiz-box" th:text="${quiz.getTitle()}"></div>
         </a>
-
-
-        <a class="quiz-link" href="/fakelink">
-        <div class="quiz-box">One quiz</div></a>
-        <a class="quiz-link" href="/alsofake">
-        <div class="quiz-box">Another quiz which ought to have loads of text inside it so that hopefully it wraps to another lineAnother quiz which ought to have loads of text inside it so that hopefully it wraps to another lineAnother quiz which ought to have loads of text inside it so that hopefully it wraps to another line</div>
-        </a>
-
     </div>
 </body>
 </html>
