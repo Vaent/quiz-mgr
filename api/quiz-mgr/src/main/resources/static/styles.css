@@ -29,7 +29,7 @@
     grid-column-end: 2;
 }
 
-.quiz-box {
+.quiz-box, .question-box {
     border: 1px solid grey;
     padding: 20px;
     margin: 20px 0px;
