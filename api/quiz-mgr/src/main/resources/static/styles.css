@@ -13,6 +13,17 @@
     color: green;
 }
 
+.answers-list {
+    margin: 15px 0px;
+}
+.answer-text {
+    margin: 5px;
+}
+
+.editor-controls {
+    margin: 0px;
+}
+
 #login-form-elements {
     display: grid;
     grid-template-columns: 6rem 20rem;
@@ -31,6 +42,7 @@
 
 .question-text {
     font-weight: bold;
+    margin: 10px;
 }
 
 .quiz-box, .question-box {
@@ -55,13 +67,24 @@ body {
 
 button {
     color: white;
-    font-weight: bold;
     padding: 10px 20px;
     margin: 25px 0px;
     border-radius: 10px;
 }
 button.login-button {
-    background-color: green;
+    font-weight: bold;
+    background-color: rgb(0, 100, 20);
+}
+button.editor-action {
+    font-size: 1rem;
+    padding: 5px 7px;
+    margin: 0px 0px 15px;
+}
+button.question-delete-button {
+    background-color: rgb(100, 0, 0);
+}
+button.question-edit-button {
+    background-color: rgb(0, 0, 70);
 }
 
 h1 {

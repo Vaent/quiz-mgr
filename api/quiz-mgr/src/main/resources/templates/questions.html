@@ -11,15 +11,25 @@
     <a href="/logout" class="logout-link">Sign out</a>
     <h2 th:text="${'Quiz: ' + quizTitle}">Quiz title</h2>
     <div id="questions-list">
+        <p th:if="${permission==1}">Click on a question to show/hide the possible answers and the question editor options.</p>
+        <p th:if="${permission==2}">Click on a question to show/hide the possible answers.</p>
         <div class="question-box"
              th:attr="onclick=${(permission==1 || permission ==2) ? 'toggleAnswerVisibility(' + question.getQuestionIndex() + ')' : ''}"
              th:each="question:${questions}">
+            <div th:id="${'editor-controls-for-q' + question.getQuestionIndex()}"
+                 class="editor-controls"
+                 th:if="${permission==1}"
+                 hidden>
+                <button class="editor-action question-edit-button" th:text="${'Edit question ' + question.getQuestionIndex()}" disabled></button>
+                <button class="editor-action question-delete-button" th:text="${'Delete question ' + question.getQuestionIndex()}" disabled></button>
+            </div>
             <p class="question-text" th:text="${question.getQuestionIndex() + '. ' + question.getQuestionText()}"></p>
             <div th:id="${'answers-for-q' + question.getQuestionIndex()}"
                  class="answers-list"
                  th:if="${permission==1 || permission ==2}"
                  hidden>
-                <ul th:each="answer:${answers}"
+                <ul class="answer-text"
+                    th:each="answer:${answers}"
                     th:if="${answer.getQuestionId()} == ${question.getId()}"
                     th:text="${answer.getAnswerIndex() + '. ' + answer.getAnswerText()}"></ul>
             </div>
@@ -28,7 +38,11 @@
 
     <script th:if="${permission==1 || permission ==2}">
         function toggleAnswerVisibility(questionNumber) {
-            document.getElementById("answers-for-q" + questionNumber).hidden ^= true;
+            let answers = document.getElementById("answers-for-q" + questionNumber);
+            let controls = document.getElementById("editor-controls-for-q" + questionNumber);
+            let isHidden = controls ? (answers.hidden && controls.hidden) : answers.hidden;
+            answers.hidden = !isHidden;
+            if (controls) { controls.hidden = !isHidden; }
         }
     </script>
 </body>
