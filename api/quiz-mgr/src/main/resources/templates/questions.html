@@ -3,6 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf_token" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{/styles.css}">
     <title th:text="${quizTitle}">Quiz</title>
 </head>
@@ -43,6 +45,21 @@
             let isHidden = controls ? (answers.hidden && controls.hidden) : answers.hidden;
             answers.hidden = !isHidden;
             if (controls) { controls.hidden = !isHidden; }
+        }
+    </script>
+
+    <script th:if="${permission==1}">
+        function createAnswer(questionId, answerText) {
+            let csrfHeader = document.getElementsByTagName("meta").namedItem("_csrf_header").getAttribute("content");
+            let csrfToken = document.getElementsByTagName("meta").namedItem("_csrf_token").getAttribute("content");
+            let ajax = new XMLHttpRequest();
+            ajax.onload = function() {
+                alert("server response for 'create answer' request was " + ajax.status);
+                console.log(ajax);
+            };
+            ajax.open("PUT", "/record/create/answer?questionId=" + questionId + "&answerText=" + answerText);
+            ajax.setRequestHeader(csrfHeader, csrfToken);
+            ajax.send();
         }
     </script>
 </body>
