@@ -4,8 +4,9 @@ DROP FUNCTION IF EXISTS fn_util_increment_answer_index;
 CREATE FUNCTION fn_create_answer(par_question_id INTEGER, par_answer_text TEXT)
 RETURNS BOOLEAN
 AS $$
-  DECLARE var_current_max_index CHAR(1);
-  DECLARE var_answer_index CHAR(1);
+DECLARE
+  var_current_max_index CHAR(1);
+  var_answer_index CHAR(1);
 BEGIN
   SELECT INTO var_current_max_index MAX(answer_index) FROM answer WHERE question_id=par_question_id;
   IF var_current_max_index IS NULL THEN

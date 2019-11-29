@@ -15,3 +15,5 @@ Open and run the `database/db_init.sql` file.
 Open and run the `database/db_user_details.sql` file.
 
 At this stage you can optionally open and run the `database/test_db_setup.sql` file - execution should complete with no errors. **THIS SCRIPT MUST NOT BE EXCEUTED AFTER ANY LIVE DATA HAS BEEN ENTERED** as it will delete all details in the quiz, question and answer tables.
+
+Open and run the `database/fn_create_answer.sql` file, followed by the `database/fn_create_question.sql` file.
